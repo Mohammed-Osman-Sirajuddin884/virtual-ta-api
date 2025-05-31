@@ -17,6 +17,18 @@ class QuestionInput(BaseModel):
     question: str
     image: str | None = None  # base64 string, optional
 
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def root():
+    return {"message": "Virtual TA API is running!"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
 @app.post("/search")
 async def search_docs(query: QuestionInput):
     # Dummy logic to simulate RAG
